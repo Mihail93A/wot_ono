@@ -17,13 +17,11 @@ public class NegativeTests {
     }
 
     @Test
-    @Tag("smoke")
     void test3() {
         assertTrue(false);
     }
 
     @Test
-    @Tag("smoke")
     void test4() {
         assertTrue(false);
     }

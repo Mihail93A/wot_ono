@@ -12,7 +12,6 @@ public class PositiveTests {
     }
 
     @Test
-    @Tag("smoke")
     void test2() {
         assertTrue(true);
     }

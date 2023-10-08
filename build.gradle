@@ -1,25 +1,12 @@
 plugins {
     id 'java-library'
-    id 'io.qameta.allure' version '2.10.0'
 }
 
 repositories {
     mavenCentral()
 }
 
-allure {
-    report {
-        version.set("2.19.0")
-    }
-    adapter { // отвечает за появление папочки build/allure-results
-        aspectjWeaver.set(true) //обработка аннотации @Step
-        frameworks {
-            junit5 { //название фреймворка
-                adapterVersion.set("2.19.0") //версия интеграции фреймворка и Allure
-            }
-        }
-    }
-}
+
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -46,6 +33,10 @@ tasks.withType(Test) {
     }
 }
 
+test {
+    useJUnitPlatform()
+}
+
 task simple_test(type: Test) {
     useJUnitPlatform {
         includeTags("simple")
@@ -59,16 +50,3 @@ task remote_test(type: Test) {
 }
 
 
-help {
-    doFirst {
-        println ""
-        println "************************************************************************ "
-        println "***                                                                  *** "
-        println "*** Welcome to https://github.com/qa-guru/demoqa-test-16!            *** "
-        println "***                                                                  *** "
-        println "*** ./gradlew help                                                   *** "
-        println "***                                                                  *** "
-        println "************************************************************************ "
-        println ""
-    }
-}
