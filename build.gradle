@@ -21,7 +21,6 @@ allure {
     }
 }
 
-
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
@@ -37,6 +36,7 @@ dependencies {
 }
 
 tasks.withType(Test) {
+    systemProperties(System.getProperties())
     useJUnitPlatform()
 
     testLogging {
@@ -47,20 +47,48 @@ tasks.withType(Test) {
     }
 }
 
-test {
-    useJUnitPlatform()
-}
-
-task simple_test(type: Test) {
+task smoke_tests(type: Test) {
     useJUnitPlatform {
-        includeTags("simple")
+        includeTags("smoke")
     }
 }
 
-task remote_test(type: Test) {
+task one_property_test(type: Test) {
     useJUnitPlatform {
-        includeTags("remote")
+        includeTags("one_property")
     }
 }
 
+task hello_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("hello")
+    }
+}
 
+task two_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("one_property")
+        includeTags("hello")
+    }
+}
+
+task tag_example_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("needed", "negative")
+        excludeTags("prod")
+    }
+}
+
+help {
+    doFirst {
+        println ""
+        println "************************************************************************ "
+        println "***                                                                  *** "
+        println "*** Welcome to https://github.com/qa-guru/demoqa-test-16!            *** "
+        println "***                                                                  *** "
+        println "*** ./gradlew help                                                   *** "
+        println "***                                                                  *** "
+        println "************************************************************************ "
+        println ""
+    }
+}
